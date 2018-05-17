@@ -335,6 +335,7 @@ runInstall(){
     fi
 
     cp -a /tmp/LNMP-${envType}/etc/nginx /etc/
+    cp -a /tmp/LNMP-${envType}/modules/* /usr/lib64/nginx/modules/
 
     groupadd www
     useradd -m -s /sbin/nologin -g www www
