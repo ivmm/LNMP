@@ -108,8 +108,6 @@ elif [ "$selected" == 'add' ]; then
 
     # wwwroot chroot
     mkdir -p $www_root/$domain;
-    touch $www_root/$domain/index.html;
-    echo 'Welcome!' > $www_root/$domain/index.html;
 
     $php_fpm_BIN --fpm-config $php_fpm_ECONF;
 
