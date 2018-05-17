@@ -27,13 +27,7 @@ PHP 7.2.0
 使用 YUM 软件包方式:
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/maicong/LNMP/master/lnmp.sh)"
-```
-
-使用源码编译方式:
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/maicong/LNMP/master/source.sh)"
+sh -c "$(curl -fsSL https://gitee.com/yunvy/LNMP/raw/master/lnmp.sh)"
 ```
 
 ### 使用
