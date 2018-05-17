@@ -29,7 +29,7 @@ PHP 7.2.0
 Using YUM packages:
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/maicong/LNMP/master/source.sh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ivmm/LNMP/master/lnmp.sh)"
 ```
 
 ### Using
