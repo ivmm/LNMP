@@ -99,8 +99,8 @@ runInstall(){
   fi
 
   showNotice "(Step 5/7) Select the Nginx version"
-  echo "1) Nginx-1.12"
-  echo "2) Nginx-1.13"
+  echo "1) Nginx-1.14"
+  echo "2) Nginx-1.15"
   echo "0) Not need"
   read -p 'Nginx [1-2,0]: ' -r -e -i 2 nginxV
   if [ "${nginxV}" = '' ]; then
@@ -130,11 +130,12 @@ runInstall(){
   [ "${isUpdate}" = '1' ] && yum update -y
   [ ! -x "/usr/bin/curl" ] && yum install curl -y
   [ ! -x "/usr/bin/unzip" ] && yum install unzip -y
+    [ ! -x "/usr/bin/zip" ] && yum install zip -y
 
   if [ ! -d "/tmp/LNMP-${envType}" ]; then
     cd /tmp || exit
     if [ ! -f "LNMP-${envType}.zip" ]; then
-      if ! curl -L --retry 3 -o "LNMP-${envType}.zip" "https://github.com/maicong/LNMP/archive/${envType}.zip"
+      if ! curl -L --retry 3 -o "LNMP-${envType}.zip" "https://github.com/ivmm/LNMP/archive/${envType}.zip"
       then
         showError "LNMP-${envType} download failed!"
         exit
@@ -305,7 +306,7 @@ runInstall(){
   fi
 
   if [ "${phpV}" != '0' ]; then
-    yum install -y php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pecl-crypto php-pecl-mcrypt php-pecl-geoip php-pecl-zip php-recode php-snmp php-soap php-xml
+    yum install -y php php-bcmath php-fpm php-gd php-json php-mbstring php-mcrypt php-mysqlnd php-opcache php-pdo php-pecl-crypto php-pecl-mcrypt php-pecl-geoip php-pecl-zip php-recode php-snmp php-soap php-xml php-pecl-redis
 
     mkdir -p /etc/php-fpm.d.stop
     mkdir -p /var/run/php-fpm
@@ -322,7 +323,8 @@ runInstall(){
   fi
 
   if [ "${nginxV}" != '0' ]; then
-    yum install -y nginx
+
+    yum install -y nginx libmaxminddb lua luajit luajit-devel geoip 
 
     mkdir -p /etc/nginx/{conf.d.stop,rewrite,ssl}
 
@@ -362,7 +364,6 @@ runInstall(){
 
   cp -a /tmp/LNMP-${envType}/etc/rc.d /etc/
 
-  chmod +x /etc/rc.d/init.d/vbackup
   chmod +x /etc/rc.d/init.d/vhost
 
   showNotice "Start service"
@@ -391,7 +392,7 @@ runInstall(){
       sed -i "s/mysql.sock/${socket}/g" /etc/phpMyAdmin/config.inc.php
     fi
 
-    echo "${mysqlPWD}" > /home/initialPWD.txt
+    echo "${mysqlPWD}" > /root/MySQLPASS.txt
     rm -rf /var/lib/mysql/test
   fi
 
