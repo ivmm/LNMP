@@ -351,13 +351,10 @@ runInstall(){
       cp -a /tmp/LNMP-${envType}/DB/Adminer /home/wwwroot/index/
       sed -i "s/phpMyAdmin/Adminer/g" /home/wwwroot/index/index.html
     elif [ "${dbV}" = "2" ]; then
-      yum install -y phpMyAdmin
-      newHash=$(echo -n ${RANDOM} | md5sum | sed "s/ .*//" | cut -b -18)
-      cp -a /tmp/LNMP-${envType}/etc/phpMyAdmin /etc/
-      sed -i "s/739174021564331540/${newHash}/g" /etc/phpMyAdmin/config.inc.php
-      cp -a /usr/share/phpMyAdmin /home/wwwroot/index/
-      rm -rf /home/wwwroot/index/phpMyAdmin/doc/html
-      cp -a /usr/share/doc/phpMyAdmin-*/html /home/wwwroot/index/phpMyAdmin/doc/
+      cd /home/wwwroot/index/
+      wget https://files.phpmyadmin.net/phpMyAdmin/4.8.0.1/phpMyAdmin-4.8.0.1-all-languages.zip
+      unzip phpMyAdmin-4.8.0.1-all-languages.zip
+      mv phpMyAdmin-4.8.0.1-all-languages phpMyAdmin
     fi
   fi
 
@@ -385,11 +382,6 @@ runInstall(){
     mysqladmin -u root password "${mysqlPWD}"
     mysqladmin -u root -p"${mysqlPWD}" -h "localhost" password "${mysqlPWD}"
     mysql -u root -p"${mysqlPWD}" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');DELETE FROM mysql.user WHERE User='';DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';FLUSH PRIVILEGES;"
-
-    socket=$(mysqladmin variables -u root -p"${mysqlPWD}" | grep -o -m 1 -E '\S*mysqld?\.sock')
-    if [ -f "/etc/phpMyAdmin/config.inc.php" ]; then
-      sed -i "s/mysql.sock/${socket}/g" /etc/phpMyAdmin/config.inc.php
-    fi
 
     echo "${mysqlPWD}" > /root/MySQLPASS.txt
     rm -rf /var/lib/mysql/test
