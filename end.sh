@@ -8,8 +8,14 @@ yum install redis
 systemctl enable redis.service
 systemctl start redis.service
 
-mkdir -p /root/tooklit
-cd /root/tooklit
+mkdir -p /root/toolkit
+cd /root/toolkit
 wget https://raw.githubusercontent.com/ivmm/Auto-fdisk/master/auto_fdisk.sh
 chmod +x auto_fdisk.sh
 ./auto_fdisk.sh
+
+cd
+
+history -c
+
+reboot
