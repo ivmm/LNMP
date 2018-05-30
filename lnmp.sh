@@ -352,9 +352,10 @@ runInstall(){
       sed -i "s/phpMyAdmin/Adminer/g" /home/wwwroot/index/index.html
     elif [ "${dbV}" = "2" ]; then
       cd /home/wwwroot/index/
-      wget https://files.phpmyadmin.net/phpMyAdmin/4.8.0.1/phpMyAdmin-4.8.0.1-all-languages.zip
-      unzip phpMyAdmin-4.8.0.1-all-languages.zip
-      mv phpMyAdmin-4.8.0.1-all-languages phpMyAdmin
+      wget https://files.phpmyadmin.net/phpMyAdmin/4.8.1/phpMyAdmin-4.8.1-all-languages.zip
+      unzip phpMyAdmin-4.8.1-all-languages.zip
+      mv phpMyAdmin-4.8.1-all-languages phpMyAdmin
+      rm -rf phpMyAdmin-4.8.1-all-languages.zip
     fi
   fi
 
