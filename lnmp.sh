@@ -241,32 +241,32 @@ runInstall(){
       sedPhpRepo "/\$basearch/{n;n;s/^mirrorlist=/#mirrorlist=/g}"
     fi
 
-    yum-config-manager --enable remi remi-test
+    yum-config-manager --enable remi
 
     case ${phpV} in
       1)
       yum-config-manager --enable remi-php54
-      yum-config-manager --disable remi-php55 remi-php56 remi-php70 remi-php71 remi-php72
+      yum-config-manager --disable remi-php55 remi-php56 remi-php70 remi-php71 remi-php72 remi-test
       ;;
       2)
       yum-config-manager --enable remi-php55
-      yum-config-manager --disable remi-php54 remi-php56 remi-php70 remi-php71 remi-php72
+      yum-config-manager --disable remi-php54 remi-php56 remi-php70 remi-php71 remi-php72 remi-test
       ;;
       3)
       yum-config-manager --enable remi-php56
-      yum-config-manager --disable remi-php54 remi-php55 remi-php70 remi-php71 remi-php72
+      yum-config-manager --disable remi-php54 remi-php55 remi-php70 remi-php71 remi-php72 remi-test
       ;;
       4)
       yum-config-manager --enable remi-php70
-      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php71 remi-php72
+      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php71 remi-php72 remi-test
       ;;
       5)
       yum-config-manager --enable remi-php71
-      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php70 remi-php72
+      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php70 remi-php72 remi-test
       ;;
       6)
       yum-config-manager --enable remi-php72
-      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php70 remi-php71
+      yum-config-manager --disable remi-php54 remi-php55 remi-php56 remi-php70 remi-php71 remi-test
       ;;
     esac
   fi
