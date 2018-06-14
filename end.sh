@@ -12,7 +12,13 @@ mkdir -p /root/toolkit
 cd /root/toolkit
 wget https://raw.githubusercontent.com/ivmm/Auto-fdisk/master/auto_fdisk.sh
 chmod +x auto_fdisk.sh
-./auto_fdisk.sh
+
+
+git clone https://github.com/Neilpang/acme.sh.git
+cd acme.sh
+./acme.sh --install  \
+--certhome  /etc/nginx/ssl \
+--useragent  "powered by juncstack."
 
 cd
 
