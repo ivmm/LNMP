@@ -13,7 +13,9 @@ cd /root/toolkit
 wget https://raw.githubusercontent.com/ivmm/Auto-fdisk/master/auto_fdisk.sh
 chmod +x auto_fdisk.sh
 
+yum install git -y
 
+cd /root/toolkit
 git clone https://github.com/Neilpang/acme.sh.git
 cd acme.sh
 ./acme.sh --install  \
